@@ -43,7 +43,9 @@ All four charts use the same cleaned file (`abortion_clean.csv`, Guttmacher Inst
 
 ## Which side we're leaning toward
 
-**Pro.** Its message is clearer and makes a stronger first impression. Its tricks (cherry-picking states and a truncated axis) are also easier to point out and explain. On the con side, counting women instead of counties is arguably the more relevant measure: access to abortion is something people have or lack, and an empty rural county has no one in it who lacks access. (Neither measure captures access fully, since distance, cost and state laws also matter.) That makes the con side harder to call outright deceptive, even though it was chosen because it gives the more favourable number.
+**Pro.** The con side's main argument is that the pro side *overstates* the problem, not that access is good. Even its own preferred measure (population-weighted, counting women rather than counties) leaves 37.5% of women aged 15–44, about **24 million women**, living in a county with no abortion clinic. In 24 of the 51 states, most women live in a county without a clinic. Six states (Mississippi, Missouri, North Dakota, Rhode Island, South Dakota and West Virginia) had just one clinic in 2020, and in Missouri 99% of residents who had an abortion travelled out of state to get one. So we think the proposition holds, even though the pro charts exaggerate how bad it is.
+
+We also think the con side uses the fairer measure. Access to abortion is something people have or lack, and an empty rural county has no one in it who lacks access, so counting women is more relevant than counting counties. Neither measure captures access fully, though: distance, cost and state laws also matter, and none of them appear in our charts.
 
 ## Techniques used
 
@@ -55,7 +57,7 @@ Each technique is labelled **deceptive** (used to mislead or overstate) or **ear
 - **Map area (deceptive).** Large, nearly empty states like Montana, Wyoming and the Dakotas take up most of the map, so the dark red dominates even though few people live there. Small, populous states with good access (Connecticut, New Jersey) are barely visible.
 - **Red colour scale (deceptive).** Darker red means a higher percentage of counties with no clinic. Red signals danger or a warning, so the reader sees a country where access is restricted almost everywhere.
 - **Headline (deceptive).** "Most of America has no abortion clinic" claims more than the data shows. The 78% in the subtitle is an unweighted average of 51 state percentages, not a national share of counties or of people.
-- **Data transformation:** none beyond selecting the column. The 78% figure is a simple mean across states.
+- **Data transformation:** the 78% in the subtitle is a calculated field: the mean of `pct_counties_no_clinic_2020` across all 51 rows (77.9%, rounded). We chose an unweighted mean, which counts Wyoming the same as California. The dataset has no county counts per state, so the true share of all U.S. counties can't be calculated. We also added two-letter state codes (`state_abbr`) so each row could be placed on the map.
 
 ### Pro chart 2: "Abortion clinics are disappearing across 17 states"
 
