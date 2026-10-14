@@ -43,7 +43,7 @@ All four charts use the same cleaned file (`abortion_clean.csv`, Guttmacher Inst
 
 ## Which side we're leaning toward
 
-**Pro.** Its message is clearer and makes a stronger first impression. Its tricks (cherry-picking states and a truncated axis) are also easier to point out and explain. On the con side, counting women instead of counties is arguably the more relevant measure, since the proposition is about people. That makes the con side harder to call outright deceptive, even though it was chosen because it gives the more favourable number.
+**Pro.** Its message is clearer and makes a stronger first impression. Its tricks (cherry-picking states and a truncated axis) are also easier to point out and explain. On the con side, counting women instead of counties is arguably the more relevant measure: access to abortion is something people have or lack, and an empty rural county has no one in it who lacks access. (Neither measure captures access fully, since distance, cost and state laws also matter.) That makes the con side harder to call outright deceptive, even though it was chosen because it gives the more favourable number.
 
 ## Techniques used
 
@@ -68,7 +68,7 @@ Each technique is labelled **deceptive** (used to mislead or overstate) or **ear
 
 ### Con chart 1: "Most American women live within reach of a clinic"
 
-- **Counting women instead of counties (deceptive).** This uses the share of women aged 15–44 living in a county with a clinic. It is a defensible measure because the proposition is about people, but it was chosen because it gives the more favourable number.
+- **Counting women instead of counties (deceptive).** This uses the share of women aged 15–44 living in a county with a clinic. It is a defensible measure because access is about people, not land, but it was chosen because it gives the more favourable number.
 - **Flipped framing (deceptive).** The chart says "62.5% live **with** a clinic" instead of "37.5% live **without** one". The numbers are identical, but readers anchor on the headline number.
 - **Leaving out the absolute number (deceptive).** 37.5% of U.S. women aged 15–44 is about **24 million women** without a clinic in their county. A percentage feels small; 24 million does not.
 - **Colour and text size (deceptive).** 62.5% is the biggest text on the page and is in calm blue, so it reads as good news. The women without a clinic are shown as neutral grey squares, which makes them seem less important.
