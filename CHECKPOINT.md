@@ -57,7 +57,7 @@ Each technique is labelled **deceptive** (used to mislead or overstate) or **ear
 - **Map area (deceptive).** Large, nearly empty states like Montana, Wyoming and the Dakotas take up most of the map, so the dark red dominates even though few people live there. Small, populous states with good access (Connecticut, New Jersey) are barely visible.
 - **Red colour scale (deceptive).** Darker red means a higher percentage of counties with no clinic. Red signals danger or a warning, so the reader sees a country where access is restricted almost everywhere.
 - **Headline (deceptive).** "Most of America has no abortion clinic" claims more than the data shows. The 78% in the subtitle is an unweighted average of 51 state percentages, not a national share of counties or of people.
-- **Data transformation:** the 78% in the subtitle is a calculated field: the mean of `pct_counties_no_clinic_2020` across all 51 rows (77.9%, rounded). We chose an unweighted mean, which counts Wyoming the same as California. The dataset has no county counts per state, so the true share of all U.S. counties can't be calculated. We also added two-letter state codes (`state_abbr`) so each row could be placed on the map.
+- **Data transformation (earnest):** the 78% in the subtitle is a calculated field: the mean of `pct_counties_no_clinic_2020` across all 51 rows (77.9%, rounded). We chose an unweighted mean, which counts Wyoming the same as California. The dataset has no county counts per state, so the true share of all U.S. counties can't be calculated. We also added two-letter state codes (`state_abbr`) so each row could be placed on the map.
 
 ### Pro chart 2: "Abortion clinics are disappearing across 17 states"
 
@@ -66,17 +66,16 @@ Each technique is labelled **deceptive** (used to mislead or overstate) or **ear
 - **Colour (deceptive).** The 2017 bar is grey and the 2020 bar is red. Grey reads as neutral "how things were" and red as danger "how things are now", so the drop looks alarming rather than small.
 - **Headline wording (deceptive).** "Disappearing" suggests clinics are vanishing, when these states lost 45 of 398.
 - **Exact value labels (earnest).** Both bars are labelled 398 and 353, so a careful reader can still work out the real size of the drop.
-- **Data transformation:** filtered to states with a negative clinic change. The dataset has no 2017 clinic count, so it was calculated as `clinics_2020 − change_2017_2020` and summed across the 17 states.
+- **Data transformation (earnest):** filtered to states with a negative clinic change. The dataset has no 2017 clinic count, so it was calculated as `clinics_2020 − change_2017_2020` and summed across the 17 states.
 
 ### Con chart 1: "Most American women live within reach of a clinic"
 
 - **Counting women instead of counties (deceptive).** This uses the share of women aged 15–44 living in a county with a clinic. It is a defensible measure because access is about people, not land, but it was chosen because it gives the more favourable number.
 - **Flipped framing (deceptive).** The chart says "62.5% live **with** a clinic" instead of "37.5% live **without** one". The numbers are identical, but readers anchor on the headline number.
 - **Leaving out the absolute number (deceptive).** 37.5% of U.S. women aged 15–44 is about **24 million women** without a clinic in their county. A percentage feels small; 24 million does not.
-- **Colour and text size (deceptive).** 62.5% is the biggest text on the page and is in calm blue, so it reads as good news. The women without a clinic are shown as neutral grey squares, which makes them seem less important.
 - **Population weighting (earnest).** A plain average of the 51 state values treats Wyoming and California as equal and gives 45.7% of women without a clinic. Weighting by each state's number of women gives 37.5%, the correct national figure. This is the more accurate method, and it also happens to favour the con side.
 - **Unit chart (earnest).** 100 equal squares, each 1% of women. There is no truncated axis or area distortion, and the exact figure is printed.
-- **Data transformation:** the number of women aged 15–44 in each state was calculated from two columns (abortions ÷ abortion rate × 1,000). The national total comes to 64.5 million, close to the actual figure of about 65 million. It was then used to compute the population-weighted average.
+- **Data transformation (earnest):** the number of women aged 15–44 in each state was calculated from two columns (abortions ÷ abortion rate × 1,000). The national total comes to 64.5 million, close to the actual figure of about 65 million. It was then used to compute the population-weighted average.
 
 ### Con chart 2: "Counting counties overstates how many women lack access"
 
@@ -84,7 +83,7 @@ Each technique is labelled **deceptive** (used to mislead or overstate) or **ear
 - **Cherry-picking states (deceptive).** Only the 10 states where the two measures differ most are shown. In these states most counties are rural and nearly empty, while women are concentrated in a few metro areas (e.g. Las Vegas in Nevada), so the gaps are huge, up to 79 points. Across all states the gap averages 32 points (77.9% vs 45.7%). Readers assume every state looks like these ten.
 - **Full 0–100% x-axis (earnest).** No truncation; the gap is large enough on its own.
 - **Colour and labels (earnest).** Two colours that colourblind readers can tell apart, plus a value label on every dot, so nothing depends on colour alone.
-- **Data transformation:** a calculated `gap` column (% of counties with no clinic − % of women with no clinic), used to rank states and keep the top 10.
+- **Data transformation (earnest):** a calculated `gap` column (% of counties with no clinic − % of women with no clinic), used to rank states and keep the top 10.
 
 ## Data cleaning (both sides)
 
