@@ -17,7 +17,10 @@ plt.rcParams.update({"font.family": "DejaVu Sans", "figure.facecolor": SURFACE,
 df = pd.read_csv("abortion_clean.csv")
 w = df.women_15_44_2020
 pct_with = 100 - (df.pct_women_no_clinic_2020 * w).sum() / w.sum()
-pct_instate = 100 - (df.pct_traveled_out_of_state_2020 * w).sum() / w.sum()
+# The travel column is a share OF RESIDENTS WHO OBTAINED AN ABORTION, so it is
+# weighted by that count, not by the female population.
+ab = df.abortions_residence_2020
+pct_instate = 100 - (df.pct_traveled_out_of_state_2020 * ab).sum() / ab.sum()
 
 
 def swatch(fig, x, y, color, label, size=0.016):
@@ -79,9 +82,11 @@ def build(path="con_1_hero.png"):
              fontsize=9, color=MUTED, va="top")
 
     fig.text(0.065, 0.045,
-             "Guttmacher Institute, 2020. Both figures are weighted by state population.\n"
-             "Note the two measures cover different groups: the 62.5% is all women aged 15–44; "
-             "the 88% is only those who obtained an abortion.",
+             "Guttmacher Institute, 2020. The two measures cover different groups and are "
+             "weighted differently.\n"
+             "The 62.5% covers all women aged 15\u201344, weighted by each state's female "
+             "population. The " + f"{pct_instate:.0f}" + "% covers only people who obtained an "
+             "abortion,\nweighted by each state's number of such residents.",
              fontsize=8.5, color=MUTED, va="top", linespacing=1.5)
 
     fig.savefig(path, dpi=200, bbox_inches="tight")

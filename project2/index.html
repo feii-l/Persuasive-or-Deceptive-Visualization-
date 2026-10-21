@@ -206,79 +206,16 @@
                 <h3>FOR the Proposition</h3>
 
                 <figure>
-                    <img
-                        src="pro_map.png"
-                        alt="Choropleth map of the United States shaded by the percentage of each state's counties that have no abortion clinic in 2020. Most states are dark red, in the 90 percent or higher band."
-                    />
-                    <figcaption>
-                        <strong>Most of America has no abortion clinic.</strong>
-                        Percentage of each state's counties with no known
-                        abortion clinic in 2020. In the average state, 78% of
-                        counties have none. Source: Guttmacher Institute, 2020.
-                    </figcaption>
+                    <img src="IMAGE_FILENAME" alt="" />
+                    <figcaption>BRIEF CAPTION HERE.</figcaption>
                 </figure>
 
                 <p>Design Decisions and Rationale:</p>
 
-                <div class="todo">
-                    <strong>Fei — please confirm or rewrite these five.</strong>
-                    They are drafted from the checkpoint write-up and the scores
-                    are a starting point. The rubric asks each decision to say
-                    what you considered and rejected, which only you can supply.
-                </div>
-
-                <ul class="decisions">
-                    <li>
-                        <strong>Counting counties rather than women</strong>
-                        <span class="score">−1.5</span><br />
-                        The map shows the share of each state's counties with no
-                        clinic. Most counties are rural and thinly populated
-                        while clinics sit in cities, so counting counties
-                        produces 78% where counting women aged 15–44 produces
-                        37.5%. Both figures are in the dataset; this one was
-                        chosen because it is the larger. The against side made
-                        the opposite choice from the same two columns.
-                    </li>
-                    <li>
-                        <strong>Map area as the encoding</strong>
-                        <span class="score">−1.5</span><br />
-                        A choropleth gives every state the visual weight of its
-                        land area. Montana, Wyoming and the Dakotas dominate the
-                        image despite holding very few people, while small,
-                        populous states with good access (Connecticut, New
-                        Jersey, Rhode Island) are too small to read and had to
-                        be listed off to the side. A cartogram scaled by
-                        population would have shown the opposite impression.
-                    </li>
-                    <li>
-                        <strong>Red sequential colour scale</strong>
-                        <span class="score">−1</span><br />
-                        Darker red marks a higher share of counties without a
-                        clinic. Red reads as danger or warning rather than as a
-                        neutral magnitude, so the map feels like an alarm before
-                        any number is read.
-                    </li>
-                    <li>
-                        <strong>Headline wording</strong>
-                        <span class="score">−2</span><br />
-                        "Most of America has no abortion clinic" claims more
-                        than the data shows. The 78% is an unweighted mean of 51
-                        state percentages — not a national share of counties,
-                        and certainly not a share of people. The subtitle states
-                        the real measure, but the headline is what most readers
-                        take away.
-                    </li>
-                    <li>
-                        <strong>Per-state value labels and a binned legend</strong>
-                        <span class="score">+2</span><br />
-                        Every state carries its own percentage and the legend
-                        names explicit ranges, so a reader can check any
-                        individual state instead of estimating from colour.
-                        States too small to label are listed beside the map so
-                        none are silently dropped. This was added after feedback
-                        that the colour scheme alone made states
-                        indistinguishable.
-                    </li>
+                <ul>
+                    <li>RATIONALE_1</li>
+                    <li>RATIONALE_2</li>
+                    <li>RATIONALE_3</li>
                 </ul>
             </section>
 
@@ -288,7 +225,7 @@
                 <figure>
                     <img
                         src="con_hero.png"
-                        alt="A large figure reading 62.5 percent beside a grid of 100 squares, 63 of them filled blue, showing the share of U.S. women aged 15 to 44 who live in a county with at least one abortion clinic. Below, a bar shows 88 percent of people who obtained an abortion in 2020 stayed in their own state and 12 percent crossed a state line."
+                        alt="A large figure reading 62.5 percent beside a grid of 100 squares, 63 of them filled blue, showing the share of U.S. women aged 15 to 44 who live in a county with at least one abortion clinic. Below, a bar shows 91 percent of people who obtained an abortion in 2020 stayed in their own state and 9 percent crossed a state line."
                     />
                     <figcaption>
                         <strong
@@ -298,7 +235,7 @@
                         Among U.S. women aged 15–44, 62.5% live in a county with
                         at least one abortion clinic, weighted by each state's
                         female population across the 50 states and DC. Below, of
-                        the people who obtained an abortion in 2020, 88% did so
+                        the people who obtained an abortion in 2020, 91% did so
                         without leaving their state. Source: Guttmacher
                         Institute, 2020.
                     </figcaption>
@@ -380,13 +317,20 @@
                         same as "a clinic close to me." We rewrote the headline
                         to say literally what the data says, and rather than drop
                         the question we answered it with the one behavioural
-                        column available: 88% of people who obtained an abortion
-                        in 2020 did so without crossing a state line. We also
-                        flag in the figure that the two measures cover different
-                        groups — all women aged 15–44 for the 62.5%, only those
-                        who obtained an abortion for the 88% — because sliding
-                        between two populations inside one figure would otherwise
-                        be a fourth deceptive move.
+                        column available: 91% of people who obtained an abortion
+                        in 2020 did so without crossing a state line. Our first
+                        attempt at this number weighted the travel column by each
+                        state's female population and got 88%; that is the wrong
+                        denominator, because the column is a share of the people
+                        who obtained an abortion, not of all women. Re-weighting
+                        by that count gives 91%, which matches Guttmacher's own
+                        published finding that nearly one in ten people travelled
+                        across state lines. We also flag in the figure that the
+                        two measures cover different groups and are weighted
+                        differently — all women aged 15–44 for the 62.5%, only
+                        those who obtained an abortion for the 91% — because
+                        sliding between two populations inside one figure would
+                        otherwise be a fourth deceptive move.
                     </li>
                 </ul>
             </section>

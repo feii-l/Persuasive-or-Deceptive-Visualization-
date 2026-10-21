@@ -7,7 +7,7 @@ Chart file: `con_1_hero.png` · Script: `make_con_chart.py`
 > **Most American women live in a county that has a clinic.** Among U.S. women aged
 > 15–44, 62.5% live in a county with at least one abortion clinic, weighted by each
 > state's female population across the 50 states and DC. Below, of the people who
-> obtained an abortion in 2020, 88% did so without leaving their state.
+> obtained an abortion in 2020, 91% did so without leaving their state.
 > Source: Guttmacher Institute, 2020.
 
 ## Design decisions
@@ -57,11 +57,16 @@ and the legend read "no clinic **nearby**." Feedback pointed out that both words
 travel distance, which this dataset does not measure at all — a county can be larger
 than a small state, so "a clinic somewhere in my county" is not the same as "a clinic
 close to me." We rewrote the headline to say literally what the data says, and rather
-than drop the question we answered it with the one behavioural column available: 88% of
-people who obtained an abortion in 2020 did so without crossing a state line. We also
-flag in the figure that the two measures cover different groups — all women aged 15–44
-for the 62.5%, only those who obtained an abortion for the 88% — because sliding
-between two populations inside one figure would otherwise be a fourth deceptive move.
+than drop the question we answered it with the one behavioural column available: 91% of
+people who obtained an abortion in 2020 did so without crossing a state line. Our first
+attempt at this number weighted the travel column by each state's female population and
+got 88%; that is the wrong denominator, because the column is a share of the people who
+obtained an abortion, not of all women. Re-weighting by that count gives 91%, which
+matches Guttmacher's own published finding that nearly one in ten people travelled
+across state lines. We also flag in the figure that the two measures cover different
+groups and are weighted differently — all women aged 15–44 for the 62.5%, only those who
+obtained an abortion for the 91% — because sliding between two populations inside one
+figure would otherwise be a fourth deceptive move.
 
 ### Unit chart form — *(supporting note, not a separate decision)*
 
