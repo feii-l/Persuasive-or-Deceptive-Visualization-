@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Project 2 Report</title>
+        <style>
+            :root {
+                --color-neutral-95: hsl(220 10% 95%);
+                --color-neutral-90: hsl(220 10% 90%);
+                --color-neutral-80: hsl(220 10% 80%);
+                --color-neutral-70: hsl(220 10% 70%);
+                --color-neutral-60: hsl(220 10% 60%);
+                --color-neutral-50: hsl(220 10% 50%);
+                --color-neutral-40: hsl(220 10% 40%);
+                --color-neutral-30: hsl(220 10% 30%);
+                --color-neutral-20: hsl(220 10% 20%);
+                --color-neutral-10: hsl(220 10% 10%);
+            }
+
+            html {
+                font: 100%/1.5 system-ui;
+                counter-reset: figure;
+                background: var(--color-neutral-95);
+                max-width: min(75vw, 80em);
+                margin: 0 auto;
+            }
+
+            /* Headings */
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                line-height: 1.1;
+                font-weight: 600;
+                text-wrap: balance;
+            }
+
+            h1,
+            h2 {
+                border-bottom: 1px solid var(--color-neutral-80);
+                padding-bottom: 0.2em;
+            }
+
+            h1 {
+                margin-block: 1em 0.5rem;
+                font-size: clamp(2.5em, 150% + 2vh + 2vw, 10vmin);
+                font-weight: 800;
+
+                small {
+                    display: block;
+                    width: fit-content;
+                    padding: 0.2em 0.5em;
+                    margin-inline: auto;
+                    color: white;
+                    background: var(--color-neutral-40);
+                    font-size: 40%;
+                    text-transform: uppercase;
+                    white-space: nowrap;
+                }
+            }
+
+            h2 {
+                font-size: 180%;
+                color: var(--color-neutral-30);
+            }
+
+            h3 {
+                font-size: 130%;
+            }
+
+            /* Lists */
+
+            ul,
+            ol {
+                padding-inline-start: 2em;
+            }
+
+            li {
+                &::marker {
+                    color: var(--color-neutral-40);
+                }
+
+                + li {
+                    margin-top: 0.2em;
+                }
+            }
+
+            /* Sectioning elements */
+
+            header {
+                padding-block: 1em;
+                text-align: center;
+            }
+
+            main {
+                background: white;
+                color: var(--color-neutral-20);
+                border-radius: 1rem;
+                padding: 0.1rem 2rem;
+            }
+
+            /* Figures */
+
+            figure {
+                margin: 1em 0;
+                padding: 0.5rem;
+                margin-inline: -0.5em;
+                border: 1px solid var(--color-neutral-80);
+                box-shadow: 0 0.1em 0.2em var(--color-neutral-95);
+                text-align: center;
+                background: white;
+
+                > figcaption {
+                    font: 500 75% var(--font-sans);
+                    background: var(--color-neutral-95);
+                    padding: 0.5rem;
+                    margin: -0.5rem;
+                    margin-top: 0.5rem;
+                    counter-increment: figure;
+                    text-align: left;
+
+                    &::before {
+                        content: "Figure " counter(figure) ": ";
+                        font-weight: bold;
+                        color: var(--color-neutral-40);
+                    }
+
+                    a:not(:hover, :focus, :active) {
+                        color: inherit;
+                        text-decoration: underline;
+                        text-decoration-color: color-mix(
+                            in lab,
+                            currentColor,
+                            transparent 70%
+                        );
+                    }
+                }
+            }
+
+            /* Additions for this report */
+
+            figure img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .score {
+                display: inline-block;
+                padding: 0.05em 0.45em;
+                border-radius: 0.3em;
+                font-size: 85%;
+                font-weight: 700;
+                font-variant-numeric: tabular-nums;
+                background: var(--color-neutral-90);
+                color: var(--color-neutral-20);
+            }
+
+            .decisions > li {
+                margin-top: 0.9em;
+            }
+
+            .todo {
+                border-left: 4px solid var(--color-neutral-60);
+                background: var(--color-neutral-95);
+                padding: 0.75em 1em;
+                margin: 1em 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>
+                <small>Project 2</small>
+                Persuasive or Deceptive Visualization?
+            </h1>
+
+            <p>
+                <strong>Abigail Suwargo</strong> —
+                <em>asuwargo@ucsd.edu</em><br />
+                <strong>Alina Gao</strong> — <em>alg106@ucsd.edu</em><br />
+                <strong>Fei Liang</strong> — <em>feliang@ucsd.edu</em>
+            </p>
+        </header>
+
+        <main>
+            <h2>
+                Proposition: Access to abortion care in the United States is
+                severely restricted
+            </h2>
+
+            <p>
+                Both figures below are built from the same cleaned file
+                (<code>abortion_clean.csv</code>, Guttmacher Institute data for
+                the 50 states and DC), so the two sides disagree about framing,
+                not about the numbers. Each design decision is scored from
+                <strong>−2</strong> (fully deceptive) to <strong>+2</strong>
+                (fully earnest).
+            </p>
+
+            <section>
+                <h3>FOR the Proposition</h3>
+
+                <figure>
+                    <img
+                        src="pro_map.png"
+                        alt="Choropleth map of the United States shaded by the percentage of each state's counties that have no abortion clinic in 2020. Most states are dark red, in the 90 percent or higher band."
+                    />
+                    <figcaption>
+                        <strong>Most of America has no abortion clinic.</strong>
+                        Percentage of each state's counties with no known
+                        abortion clinic in 2020. In the average state, 78% of
+                        counties have none. Source: Guttmacher Institute, 2020.
+                    </figcaption>
+                </figure>
+
+                <p>Design Decisions and Rationale:</p>
+
+                <div class="todo">
+                    <strong>Fei — please confirm or rewrite these five.</strong>
+                    They are drafted from the checkpoint write-up and the scores
+                    are a starting point. The rubric asks each decision to say
+                    what you considered and rejected, which only you can supply.
+                </div>
+
+                <ul class="decisions">
+                    <li>
+                        <strong>Counting counties rather than women</strong>
+                        <span class="score">−1.5</span><br />
+                        The map shows the share of each state's counties with no
+                        clinic. Most counties are rural and thinly populated
+                        while clinics sit in cities, so counting counties
+                        produces 78% where counting women aged 15–44 produces
+                        37.5%. Both figures are in the dataset; this one was
+                        chosen because it is the larger. The against side made
+                        the opposite choice from the same two columns.
+                    </li>
+                    <li>
+                        <strong>Map area as the encoding</strong>
+                        <span class="score">−1.5</span><br />
+                        A choropleth gives every state the visual weight of its
+                        land area. Montana, Wyoming and the Dakotas dominate the
+                        image despite holding very few people, while small,
+                        populous states with good access (Connecticut, New
+                        Jersey, Rhode Island) are too small to read and had to
+                        be listed off to the side. A cartogram scaled by
+                        population would have shown the opposite impression.
+                    </li>
+                    <li>
+                        <strong>Red sequential colour scale</strong>
+                        <span class="score">−1</span><br />
+                        Darker red marks a higher share of counties without a
+                        clinic. Red reads as danger or warning rather than as a
+                        neutral magnitude, so the map feels like an alarm before
+                        any number is read.
+                    </li>
+                    <li>
+                        <strong>Headline wording</strong>
+                        <span class="score">−2</span><br />
+                        "Most of America has no abortion clinic" claims more
+                        than the data shows. The 78% is an unweighted mean of 51
+                        state percentages — not a national share of counties,
+                        and certainly not a share of people. The subtitle states
+                        the real measure, but the headline is what most readers
+                        take away.
+                    </li>
+                    <li>
+                        <strong>Per-state value labels and a binned legend</strong>
+                        <span class="score">+2</span><br />
+                        Every state carries its own percentage and the legend
+                        names explicit ranges, so a reader can check any
+                        individual state instead of estimating from colour.
+                        States too small to label are listed beside the map so
+                        none are silently dropped. This was added after feedback
+                        that the colour scheme alone made states
+                        indistinguishable.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>AGAINST the Proposition</h3>
+
+                <figure>
+                    <img
+                        src="con_hero.png"
+                        alt="A large figure reading 62.5 percent beside a grid of 100 squares, 63 of them filled blue, showing the share of U.S. women aged 15 to 44 who live in a county with at least one abortion clinic. Below, a bar shows 88 percent of people who obtained an abortion in 2020 stayed in their own state and 12 percent crossed a state line."
+                    />
+                    <figcaption>
+                        <strong
+                            >Most American women live in a county that has a
+                            clinic.</strong
+                        >
+                        Among U.S. women aged 15–44, 62.5% live in a county with
+                        at least one abortion clinic, weighted by each state's
+                        female population across the 50 states and DC. Below, of
+                        the people who obtained an abortion in 2020, 88% did so
+                        without leaving their state. Source: Guttmacher
+                        Institute, 2020.
+                    </figcaption>
+                </figure>
+
+                <p>Design Decisions and Rationale:</p>
+
+                <ul class="decisions">
+                    <li>
+                        <strong>Counting women rather than counties</strong>
+                        <span class="score">−1.5</span><br />
+                        The same dataset gives two very different answers: 77.9%
+                        of counties have no clinic, but only 37.5% of women live
+                        in such a county. Counties are a unit of land and most
+                        are rural and nearly empty, so the women-based measure
+                        is arguably the more relevant one when the proposition
+                        is about people. We chose it because it produced the
+                        number we wanted, not because we settled the measurement
+                        question first. We considered showing both measures side
+                        by side — we built a connected dot plot that did exactly
+                        that — and rejected it because disclosing the gap
+                        undercut our own argument.
+                    </li>
+                    <li>
+                        <strong
+                            >Stating the share who have access rather than who
+                            do not</strong
+                        >
+                        <span class="score">−1</span><br />
+                        The figure leads with "62.5% live in a county with a
+                        clinic" instead of "37.5% do not." The arithmetic is
+                        identical and nothing is hidden, but readers anchor on
+                        the headline number and a figure above half reads as
+                        reassuring. We tried the inverse headline and the same
+                        chart felt like an argument for the other side, which is
+                        how we knew the framing rather than the data was doing
+                        the work.
+                    </li>
+                    <li>
+                        <strong>Leaving the absolute number out</strong>
+                        <span class="score">−1.5</span><br />
+                        37.5% of 64.5 million women is roughly 24 million people
+                        without a clinic in their county. The figure never says
+                        so. A percentage below half feels tolerable; "24 million
+                        women" does not, and we expect this omission persuades
+                        more than any visual choice on the page. We discussed
+                        adding it as a footnote and decided against it, which is
+                        the least honest decision in this figure.
+                    </li>
+                    <li>
+                        <strong
+                            >Weighting by population instead of averaging the
+                            states</strong
+                        >
+                        <span class="score">+2</span><br />
+                        A plain mean of the 51 state values treats Wyoming and
+                        California as equal and returns 45.7%. We recovered each
+                        state's number of women aged 15–44 from two columns
+                        (abortions ÷ abortion rate × 1,000; the national total
+                        comes to 64.5 million against roughly 65 million actual)
+                        and weighted by it, giving 37.5% — the
+                        population-weighted national figure. This is the more
+                        defensible method and it also happens to favour our
+                        side, which is worth saying out loud rather than quietly
+                        banking.
+                    </li>
+                    <li>
+                        <strong
+                            >Dropping "within reach" and adding a travel
+                            measure</strong
+                        >
+                        <span class="score">+2</span><br />
+                        The first version was headlined "Most American women live
+                        <em>within reach</em> of a clinic" and the legend read
+                        "no clinic <em>nearby</em>." Feedback pointed out that
+                        both words imply travel distance, which this dataset does
+                        not measure at all — a county can be larger than a small
+                        state, so "a clinic somewhere in my county" is not the
+                        same as "a clinic close to me." We rewrote the headline
+                        to say literally what the data says, and rather than drop
+                        the question we answered it with the one behavioural
+                        column available: 88% of people who obtained an abortion
+                        in 2020 did so without crossing a state line. We also
+                        flag in the figure that the two measures cover different
+                        groups — all women aged 15–44 for the 62.5%, only those
+                        who obtained an abortion for the 88% — because sliding
+                        between two populations inside one figure would otherwise
+                        be a fourth deceptive move.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Final Reflection</h2>
+
+                <div class="todo">
+                    <strong>To write — 2 to 3 paragraphs.</strong> The
+                    assignment asks this section to cover five things, so make
+                    sure each one appears somewhere:
+                    <ul>
+                        <li>How the process went — how we split the work and built the two sides.</li>
+                        <li>What was difficult.</li>
+                        <li>What surprised us.</li>
+                        <li>What we think ethical visualization means.</li>
+                        <li>
+                            Where we would draw the line between acceptable
+                            persuasion and misleading design.
+                        </li>
+                    </ul>
+                    Material already on hand that is worth using: the national
+                    clinic count barely moved (812 → 807, −0.6%) yet both of us
+                    could build a true-looking story from it; the same two
+                    columns produced 78% and 37.5%; and the "within reach"
+                    wording was a deception none of us noticed until it was
+                    pointed out, which is the clearest example of how easy it is
+                    to mislead without intending to.
+                </div>
+
+                <p>[WRITE FINAL REFLECTION PARAGRAPHS HERE.]</p>
+            </section>
+        </main>
+    </body>
+</html>
