@@ -208,10 +208,10 @@
                 <figure>
                     <img
                         src="pro_map.png"
-                        alt="Choropleth map of the United States shaded by the percentage of each state's counties that have no abortion clinic in 2020. Most states are dark red, in the 90 percent or higher band."
+                        alt="Choropleth map of the United States shaded by the percentage of each state's counties that have no abortion clinic in 2020. Every state is labelled with its percentage. More than half of states (28 of 51) are in the two darkest bands, at 90 percent or higher; only the West Coast and parts of the Northeast are pale."
                     />
                     <figcaption>
-                        <strong>Most of America has no abortion clinic.</strong>
+                        <strong>In most states, nearly every county has no abortion clinic.</strong>
                         Percentage of each state's counties with no known
                         abortion clinic in 2020. In the average state, 78% of
                         counties have none. Source: Guttmacher Institute, 2020.
@@ -220,64 +220,79 @@
 
                 <p>Design Decisions and Rationale:</p>
 
-                <div class="todo">
-                    <strong>Fei — please confirm or rewrite these five.</strong>
-                    They are drafted from the checkpoint write-up and the scores
-                    are a starting point. The rubric asks each decision to say
-                    what you considered and rejected, which only you can supply.
-                </div>
-
                 <ul class="decisions">
                     <li>
                         <strong>Counting counties rather than women</strong>
                         <span class="score">−1.5</span><br />
                         The map shows the share of each state's counties with no
                         clinic. Most counties are rural and thinly populated
-                        while clinics sit in cities, so counting counties
-                        produces 78% where counting women aged 15–44 produces
-                        37.5%. Both figures are in the dataset; this one was
-                        chosen because it is the larger. The against side made
-                        the opposite choice from the same two columns.
+                        while clinics sit in cities, so the two measures in the
+                        dataset tell very different stories: averaged across
+                        the 51 states, 78% of counties have no clinic, but only
+                        46% of women aged 15–44 live in such a county (37.5%
+                        when weighted by population). We chose counties because
+                        it gave the larger number. Mapping the women-based column
+                        instead would have turned much of the map pale, which is
+                        exactly why we did not. The against side made the
+                        opposite choice from the same two columns.
                     </li>
                     <li>
-                        <strong>Map area as the encoding</strong>
+                        <strong>A map rather than a bar chart</strong>
                         <span class="score">−1.5</span><br />
                         A choropleth gives every state the visual weight of its
                         land area. Montana, Wyoming and the Dakotas dominate the
                         image despite holding very few people, while small,
                         populous states with good access (Connecticut, New
                         Jersey, Rhode Island) are too small to read and had to
-                        be listed off to the side. A cartogram scaled by
-                        population would have shown the opposite impression.
+                        be labelled off the coast. We also considered a sorted
+                        bar chart of all 51 states, which gives every state the
+                        same width, and chose the map because land area makes
+                        the problem look national. A cartogram scaled by
+                        population would have given the opposite impression.
                     </li>
                     <li>
-                        <strong>Red sequential colour scale</strong>
+                        <strong>Binning into five red bands</strong>
                         <span class="score">−1</span><br />
-                        Darker red marks a higher share of counties without a
-                        clinic. Red reads as danger or warning rather than as a
+                        We grouped states into five bands (under 50%, 50–74%,
+                        75–89%, 90–94%, 95% or more) and coloured them from pale
+                        pink to dark red. Red reads as danger rather than as a
                         neutral magnitude, so the map feels like an alarm before
-                        any number is read.
+                        any number is read. The cut points are a choice too:
+                        they put 21 of 51 states in the darkest band, while
+                        merging everything above 75% into one band would have
+                        made the map look calmer. The bands are also a data
+                        transformation: each state's percentage is binned with
+                        <code>pd.cut</code>, using edges chosen so that every
+                        legend label is exact (95% sits in "95% or more", not
+                        "90–94%").
                     </li>
                     <li>
                         <strong>Headline wording</strong>
-                        <span class="score">−2</span><br />
-                        "Most of America has no abortion clinic" claims more
-                        than the data shows. The 78% is an unweighted mean of 51
-                        state percentages — not a national share of counties,
-                        and certainly not a share of people. The subtitle states
-                        the real measure, but the headline is what most readers
-                        take away.
+                        <span class="score">−1</span><br />
+                        "In most states, nearly every county has no abortion
+                        clinic" is literally true: 28 of 51 states are at 90%
+                        or higher. But it points the reader at counties, which
+                        are mostly empty land, and "nearly every" suggests
+                        people have nowhere to go. Our checkpoint headline,
+                        "Most of America has no abortion clinic," went further
+                        than the data (the 78% is an unweighted mean of 51 state
+                        percentages, not a share of the country or of people)
+                        and a reader could call it out at a glance. We replaced
+                        it with a claim that survives a fact-check but frames
+                        the data the same way, which makes it more persuasive
+                        and harder to spot.
                     </li>
                     <li>
-                        <strong>Per-state value labels and a binned legend</strong>
+                        <strong>Per-state value labels and a titled legend</strong>
                         <span class="score">+2</span><br />
-                        Every state carries its own percentage and the legend
-                        names explicit ranges, so a reader can check any
-                        individual state instead of estimating from colour.
-                        States too small to label are listed beside the map so
-                        none are silently dropped. This was added after feedback
-                        that the colour scheme alone made states
-                        indistinguishable.
+                        Every state carries its own percentage, and the legend
+                        is titled "% of each state's counties with no abortion
+                        clinic," so a careful reader can check any state and see
+                        that the map counts counties, not people. States too
+                        small to label are listed beside the map so none are
+                        silently dropped. We added these after feedback that our
+                        original continuous colour scale made most states look
+                        identical (nearly all were between 75% and 99%).
                     </li>
                 </ul>
             </section>
@@ -394,30 +409,51 @@
             <section>
                 <h2>Final Reflection</h2>
 
-                <div class="todo">
-                    <strong>To write — 2 to 3 paragraphs.</strong> The
-                    assignment asks this section to cover five things, so make
-                    sure each one appears somewhere:
-                    <ul>
-                        <li>How the process went — how we split the work and built the two sides.</li>
-                        <li>What was difficult.</li>
-                        <li>What surprised us.</li>
-                        <li>What we think ethical visualization means.</li>
-                        <li>
-                            Where we would draw the line between acceptable
-                            persuasion and misleading design.
-                        </li>
-                    </ul>
-                    Material already on hand that is worth using: the national
-                    clinic count barely moved (812 → 807, −0.6%) yet both of us
-                    could build a true-looking story from it; the same two
-                    columns produced 78% and 37.5%; and the "within reach"
-                    wording was a deception none of us noticed until it was
-                    pointed out, which is the clearest example of how easy it is
-                    to mislead without intending to.
-                </div>
-
-                <p>[WRITE FINAL REFLECTION PARAGRAPHS HERE.]</p>
+                <!-- DRAFT: review together and edit so it sounds like us before submitting -->
+                <p>
+                    We split the work by side: Fei built the argument for the
+                    proposition, Alina built the argument against it, and Abby
+                    wrote up the techniques. Before anyone made a chart, we
+                    cleaned the Guttmacher spreadsheet into one shared CSV, so
+                    both sides would disagree about framing and never about
+                    the numbers. The hardest part was not finding a misleading
+                    angle; it was keeping it subtle. Our first versions were
+                    either too obvious (a headline that claimed "most of
+                    America") or accidentally hard to read (a continuous red
+                    scale where 75% and 99% looked the same). Fixing
+                    readability, by binning the map and labelling every state,
+                    made the honest parts of each chart clearer and left the
+                    deceptive choices in the framing, where they are harder to
+                    notice.
+                </p>
+                <p>
+                    What surprised us most was how little the data had to
+                    change. The same two columns gave 78% of counties without
+                    a clinic and 37.5% of women without one. Nationally the
+                    number of clinics barely moved between 2017 and 2020 (812
+                    to 807), yet one of our checkpoint charts kept only the 17
+                    states that lost clinics and turned that into an 11% drop. Even the most rigorous choice
+                    we made, weighting by population, happened to favour one
+                    side. And the "within reach" wording on the against chart
+                    was misleading in a way none of us noticed until it came
+                    up in our checkpoint feedback, which showed us how easily a chart can
+                    mislead without anyone intending it to.
+                </p>
+                <p>
+                    For us, an ethical visualization is one where a careful
+                    reader who checks the labels, legend and source ends up
+                    believing the same thing as a reader who only glances at
+                    it. Choosing a measure, a chart type or a headline that
+                    emphasises one side is acceptable persuasion as long as the
+                    measure is stated plainly and the claim is literally true.
+                    We would draw the line at choices that only work if the
+                    reader does not look closely: a truncated axis on a bar
+                    chart, a selection of states presented as if it were
+                    typical, or leaving out a number like "24 million women"
+                    because it would change the reader's mind. On a topic like
+                    abortion access, where charts can shape real decisions,
+                    that line matters more, not less.
+                </p>
             </section>
         </main>
     </body>
